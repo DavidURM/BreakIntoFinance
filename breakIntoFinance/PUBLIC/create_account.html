@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Finance Tracker</title>
+    <link rel="stylesheet" href="index.css"> <!-- Link to existing CSS -->
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div class="navigation">
+    <div class="nav-title">Finance Tracker</div>
+    <ul class="navbarul">
+        <li><a href="/" class="nvb">Home</a></li>
+    </ul>
+</div>
+
+<div class="container2">
+    <h2>Create Your Account</h2>
+    <form action="/auth/register" method="POST"> <!-- Backend script to handle registration -->
+
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+        <label for="cardholder">Cardholder Number</label>
+        <input type="text" id="cardholder" name="cardholder" placeholder="Enter your cardholder number" required>
+
+        <label for="currency">Preferred Currency</label>
+        <select id="currency" name="currency" required>
+            <option value="EURO">Euro</option>
+            <option value="DOLLAR">Dollar</option>
+            <option value="POUND">Pound</option>
+        </select>
+
+        <button type="submit">Create Account</button>
+    </form>
+    <p style="text-align: center; margin-top: 15px;">
+        <a href="/login">Already have an account? Login</a>
+    </p>
+</div>
+
+</body>
+</html>

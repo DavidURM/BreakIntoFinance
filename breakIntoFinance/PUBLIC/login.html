@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Finance Tracker</title>
+  <link rel="stylesheet" href="index.css"> <!-- Link to your existing CSS -->
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div class="navigation">
+  <div class="nav-title">Finance Tracker</div>
+  <ul class="navbarul">
+    <li><a href="/" class="nvb">Home</a></li>
+  </ul>
+</div>
+
+<div class="container2">
+  <h2>Login to Your Account</h2>
+  <form action="/auth/loginUser" method="POST"> <!-- Change action as needed -->
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+    <button type="submit">Login</button>
+  </form>
+  <p style="text-align: center; margin-top: 15px;">
+    <a href="/create_account">Create an Account</a>
+    <br>
+    <a href="/forgot_password_page"> Forgot password?</a>
+  </p>
+</div>
+</body>
+</html>
