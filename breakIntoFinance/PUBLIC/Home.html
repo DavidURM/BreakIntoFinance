@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="%PUBLIC_URL%mainicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="index.css">
+    <title>Break Into Finance - Home</title>
+</head>
+<body id="Homepage" class="homepage">
+
+<!-- Navigation Bar -->
+<header>
+    <nav class="navigation">
+        <img src="logo.webp" alt="Break Into Finance" class="logo">
+        <div class="nav-title">Break Into Finance - Home</div>
+        <ul class="navbarul">
+            <li><a href="/finances" class="nvb">Finances</a></li>
+            <li><a href="/add_transaction" class="nvb">Add Transaction</a></li>
+            <li><a href="/logout" class="nvb">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="main-content">
+
+    <!-- Welcome Container -->
+    <section class="container2 welcome-box">
+        <h2>Welcome, <span id="user-name">User</span>!</h2>
+        <p>Manage your finances efficiently and track your expenses with ease.</p>
+    </section>
+
+    <!-- Total Spent Summary -->
+    <section class="container2 summary-box">
+        <h2>Total Spent</h2>
+        <p id="total-spent">Loading...</p>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>Break Into Finance &copy; 2025</p>
+</footer>
+
+<script>
+    // Fetch user data from the backend and populate the homepage
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const response = await fetch("/api/user-data"); // API endpoint for fetching session user data
+            const data = await response.json();
+
+            if (data.success) {
+                document.getElementById("user-name").innerText = data.user.user_name;
+
+                // Extract the user's currency from the first transaction (assuming all transactions use the same currency)
+                let currency = data.user.transactions.length > 0 ? data.user.transactions[0].currency : "USD"; // Default to USD if no transactions
+
+                // Calculate total spent
+                let totalSpent = data.user.transactions.reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0);
+
+                // Format totalSpent based on currency
+                let formattedTotal;
+                if (currency === "EURO") {
+                    formattedTotal = `€${totalSpent.toFixed(2)}`;
+                } else if (currency === "DOLLAR") {
+                    formattedTotal = `$${totalSpent.toFixed(2)}`;
+                } else if (currency === "POUND") {
+                    formattedTotal = `£${totalSpent.toFixed(2)}`;
+                } else {
+                    formattedTotal = `${totalSpent.toFixed(2)} ${currency}`; // Fallback for unexpected values
+                }
+
+                document.getElementById("total-spent").innerText = totalSpent === 0 ? "No transactions yet" : formattedTotal;
+
+            } else {
+                document.getElementById("user-name").innerText = "Guest";
+                document.getElementById("total-spent").innerText = "$0.00";
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+    });
+</script>
+
+
+</body>
+</html>
